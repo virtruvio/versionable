@@ -14,7 +14,7 @@ trait VersionableTrait
     /**
      * Retrieve, if exists, the property that define that Version model.
      * If no property defined, use the default Version model.
-     * 
+     *
      * Trait cannot share properties whth their class !
      * http://php.net/manual/en/language.oop5.traits.php
      * @return unknown|string
@@ -175,7 +175,7 @@ trait VersionableTrait
             $version->versionable_id   = $this->getKey();
             $version->versionable_type = get_class($this);
             $version->user_id          = $this->getAuthUserId();
-            $version->model_data       = serialize($this->getAttributes());
+            $version->model_data       = serialize($this->getOriginal());
 
             if (!empty( $this->reason )) {
                 $version->reason = $this->reason;
@@ -189,7 +189,7 @@ trait VersionableTrait
 
     /**
      * Delete old versions of this model when the reach a specific count.
-     * 
+     *
      * @return void
      */
     private function purgeOldVersions()
